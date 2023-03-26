@@ -7,7 +7,9 @@
     "build": "tsc",
     "create-db": "npm run build && node dist/createDb.js",
     "create-journey-table": "npm run build && node dist/createCityBikeJourneyTable.js",
-    "create-stations-table": "npm run build && node dist/createCityBikeStationTable.js"
+    "create-stations-table": "npm run build && node dist/createCityBikeStationTable.js",
+    "populate-stations-table": "npm run build && node dist/populateCityBikeStationTable.js",
+    "populate-journeys-table": "npm run build && node dist/populateCityBikeJourneyTable.js"
   },
   "repository": {
     "type": "git",
@@ -20,6 +22,7 @@
   },
   "homepage": "https://github.com/finye/Helsinki-city-bike-app#readme",
   "dependencies": {
+    "csv-parser": "^3.0.0",
     "dotenv": "^16.0.3",
     "pg": "^8.10.0",
     "pg-promise": "^11.4.3"
