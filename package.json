@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "tsc"
+    "build": "tsc",
+    "create-db": "npm run build && node dist/createDb.js"
   },
   "repository": {
     "type": "git",
@@ -16,7 +17,14 @@
     "url": "https://github.com/finye/Helsinki-city-bike-app/issues"
   },
   "homepage": "https://github.com/finye/Helsinki-city-bike-app#readme",
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "pg": "^8.10.0",
+    "pg-promise": "^11.4.3"
+  },
   "devDependencies": {
+    "@types/node": "^18.15.9",
+    "@types/pg": "^8.6.6",
     "typescript": "^5.0.2"
   }
 }
