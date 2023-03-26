@@ -1,0 +1,22 @@
+{
+  "name": "helsinki-city-bike-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/finye/Helsinki-city-bike-app.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/finye/Helsinki-city-bike-app/issues"
+  },
+  "homepage": "https://github.com/finye/Helsinki-city-bike-app#readme",
+  "devDependencies": {
+    "typescript": "^5.0.2"
+  }
+}
