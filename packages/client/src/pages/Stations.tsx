@@ -1,6 +1,5 @@
 import Table from "../table/Table"
 import { ColumnDefinitionType, CityBikeStation } from "../table/types"
-import dummyStationsData from "../data/stations.json"
 
 const columns: ColumnDefinitionType<CityBikeStation, keyof CityBikeStation>[] = [
 
@@ -31,18 +30,25 @@ const columns: ColumnDefinitionType<CityBikeStation, keyof CityBikeStation>[] = 
     },
     {
         key: 'x',
-        header: 'X'
+        header: 'Longitude'
     },
     {
         key: 'y',
-        header: 'Y'
+        header: 'Latitude'
     }
 ]
-export function Stations() {
+
+interface StationsProps {
+    data: CityBikeStation[]
+}
+
+const Stations = ({ data }: StationsProps) => {
     return (
         <>
             <p> Station list </p>
-            <Table data={dummyStationsData} columns={columns} />
+            <Table data={data} columns={columns} />
         </>
     )
 }
+
+export default Stations
