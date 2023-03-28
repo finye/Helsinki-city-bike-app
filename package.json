@@ -1,37 +1,17 @@
 {
-  "name": "helsinki-city-bike-app",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "build": "tsc",
-    "start": "npm run build && node dist/index.js",
-    "create-journey-table": "npm run build && node dist/createCityBikeJourneyTable.js",
-    "create-stations-table": "npm run build && node dist/createCityBikeStationTable.js",
-    "populate-stations-table": "npm run build && node dist/populateCityBikeStationTable.js",
-    "populate-journeys-table": "npm run build && node dist/populateCityBikeJourneyTable.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/finye/Helsinki-city-bike-app.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/finye/Helsinki-city-bike-app/issues"
-  },
-  "homepage": "https://github.com/finye/Helsinki-city-bike-app#readme",
-  "dependencies": {
-    "csv-parser": "^3.0.0",
-    "dotenv": "^16.0.3",
-    "express": "^4.18.2",
-    "pg": "^8.10.0",
-    "pg-promise": "^11.4.3"
-  },
-  "devDependencies": {
-    "@types/express": "^4.17.17",
-    "@types/node": "^18.15.9",
-    "@types/pg": "^8.6.6",
-    "typescript": "^5.0.2"
-  }
+    "name": "root",
+    "private": true,
+    "workspaces": [
+        "packages/*"
+    ],
+    "devDependencies": {
+        "lerna": "^6.6.1"
+    },
+    "packages": [
+        "packages/*"
+    ],
+    "npmClient": "npm",
+    "scripts": {
+        "start": "lerna run start --parallel"
+    }
 }

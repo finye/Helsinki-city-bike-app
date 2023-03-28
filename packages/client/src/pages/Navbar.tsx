@@ -9,7 +9,7 @@ const Navbar: React.FC<NavbarProps> = (props) => {
                 <NavbarLink to="/">
                     Stations
                 </NavbarLink>
-                <NavbarLink to="/Journeys">
+                <NavbarLink to="journeys">
                     Journeys
                 </NavbarLink>
             </NavbarLinkContainer>
