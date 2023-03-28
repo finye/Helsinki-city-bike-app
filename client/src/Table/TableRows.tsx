@@ -12,11 +12,20 @@ vertical-align: middle;
 }
 `;
 
+const StyledTr = styled.tr`
+    :nth-of-type(odd) {
+      background-color: #efefef;
+    }
+    :hover {
+      background-color: lightgrey;
+  }
+`
+
 const TableRows = <T, K extends keyof T>({ data, columns }: TableRowsProps<T, K>): JSX.Element => {
 
     const rows = data.map((row, index) => {
         return (
-            <tr key={`row-${index} `}>
+            <StyledTr key={`row-${index} `}>
                 {columns.map((column, index2) => {
                     return (
                         <TableData key={`cell - ${index2} `} >
@@ -25,7 +34,7 @@ const TableRows = <T, K extends keyof T>({ data, columns }: TableRowsProps<T, K>
                     );
                 }
                 )}
-            </tr>
+            </StyledTr>
         );
     });
 
