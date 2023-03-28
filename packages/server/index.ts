@@ -7,6 +7,19 @@ app.get('/journeys', (req, res) => getDataFromTable(req, res, 'city-bikes-journe
 
 app.get('/stations', async (req, res) => getDataFromTable(req, res, 'city_bikes_station'));
 
+app.get('/station/:station_id', async (req, res) => {
+    const stationId = parseInt(req.params.station_id, 10);
+
+    const query = {
+        text: 'SELECT * FROM city_bikes_station WHERE station_id = $1',
+        values: [stationId],
+    };
+
+    const result = await db.query(query)
+
+    return res.json(result.rows[0])
+})
+
 const getDataFromTable = async (req: Request, res: Response, tableName: string) => {
     const page = parseInt(req.query.page as string) || 1; // default to page 1
     const pageSize = parseInt(req.query.pageSize as string) || 10; // default to 10 items per page
