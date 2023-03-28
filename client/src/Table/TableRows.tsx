@@ -5,7 +5,7 @@ import styled from 'styled-components';
 
 const TableData = styled.td`
 font-size: 3vh;
-color: LightGrey;
+color: black;
 border: 1px solid LightGrey;
 text-align: center;
 vertical-align: middle;
