@@ -4,8 +4,8 @@ import TableRows from "./TableRows"
 import styled from 'styled-components';
 
 const StyledTable = styled.table`
-width: 100%;
-margin: 0;
+width: 95%;
+margin: 20px;
 border-spacing: 0;
 border-collapse: collapse;
 `;

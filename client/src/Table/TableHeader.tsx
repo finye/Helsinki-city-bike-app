@@ -12,8 +12,11 @@ font-size: 3vh;
 font-weight: bold;
 text-align: center;
 padding 2;
+background-color: #c2c2c2;
 }
 `;
+
+
 
 const TableHeader = <T, K extends keyof T>({ columns }: TableHeaderProps<T, K>): JSX.Element => {
     const headers = columns.map((column, index) => {
