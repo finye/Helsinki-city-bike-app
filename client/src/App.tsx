@@ -1,17 +1,16 @@
 import React from 'react';
 import './App.css';
-import Table from './Table/Table';
-import { CityBikeStation, ColumnDefinitionType } from './Table/types';
 import { Route, Routes } from 'react-router-dom';
-import { Stations } from './Pages/Stations';
-import { Journeys } from './Pages/Journeys';
-
+import { Stations } from './pages/Stations';
+import { Journeys } from './pages/Journeys';
+import Navbar from './pages/Navbar';
 
 
 function App() {
 
   return (
     <>
+      <Navbar />
       <Routes>
         <Route path='/' element={<Stations />} />
         <Route path='/Journeys' element={<Journeys />} />
