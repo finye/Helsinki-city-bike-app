@@ -31,7 +31,6 @@ const Journeys = ({ data }: JourneysProps) => {
             ...journey,
             covered_distance_in_meters: `${(Number(journey.covered_distance_in_meters) / 1000).toFixed(1)}`,
             duration_in_seconds: `${(journey.duration_in_seconds / 60).toFixed(1)}`
-
         };
     });
 

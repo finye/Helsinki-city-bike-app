@@ -7,6 +7,7 @@ export interface CityBikeStation {
     capacity: number;
     x: string;
     y: string;
+    journey_count?: number;
 }
 export interface CityBikesJourney {
     departure: string;

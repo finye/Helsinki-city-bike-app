@@ -23,16 +23,16 @@ const SingleStaionView = () => {
     void fetchStationById()
   }, [stationId])
 
-  return (<div>
-    <h1>Station: {stationDetails?.station_id}</h1>
+  return (
+    <div>
+      <h1>Station: {stationDetails?.station_id}</h1>
 
-    <p>Capacity: {stationDetails?.capacity}</p>
-    <p>Longitude: {stationDetails?.x}</p>
-    <p>Latitude: {stationDetails?.y}</p>
-    <p>Operator: {stationDetails?.operator}</p>
-    <p>Address: {stationDetails?.address}</p>
-    <p>City: {stationDetails?.city}</p>
-  </div>)
+      <p>Longitude: {stationDetails?.x}</p>
+      <p>Latitude: {stationDetails?.y}</p>
+      <p>Address: {stationDetails?.address}</p>
+      <p>Journey: {stationDetails?.journey_count}</p>
+    </div>
+  )
 
 }
 
@@ -58,7 +58,6 @@ const App = () => {
     void fetchStations()
     void fetchjourneys()
   }, [])
-
 
   return (
     <>
