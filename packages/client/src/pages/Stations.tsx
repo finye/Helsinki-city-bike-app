@@ -46,7 +46,7 @@ const Stations = ({ data }: StationsProps) => {
     return (
         <>
             <p> Station list </p>
-            <Table data={data} columns={columns} />
+            <Table data={data} columns={columns} isRowWithLink />
         </>
     )
 }

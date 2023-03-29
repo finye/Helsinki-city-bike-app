@@ -8,6 +8,7 @@ import { CityBikeStation } from './table/types';
 
 export const PAGE_SIZE = 20
 
+// TODO: Move this into its own component
 const SingleStaionView = () => {
   const [stationDetails, setStationDetails] = useState<CityBikeStation>()
   const { stationId } = useParams()
@@ -40,6 +41,7 @@ const SingleStaionView = () => {
 const App = () => {
   const [stations, setStations] = useState<CityBikeStation[]>([])
 
+  // TODO: move this API call into its parent component
   const fetchStations = async () => {
     const response = await fetch(`/stations?pageSize=${PAGE_SIZE}`)
     const data = await response.json()

@@ -9,13 +9,14 @@ margin: 20px;
 border-spacing: 0;
 border-collapse: collapse;
 `;
-const Table = <T, K extends keyof T>({ data, columns }: TableProps<T, K>): JSX.Element => {
+const Table = <T, K extends keyof T>({ data, columns, isRowWithLink }: TableProps<T, K>): JSX.Element => {
     return (
         <StyledTable>
             <TableHeader columns={columns} />
             <TableRows
                 data={data}
                 columns={columns}
+                isRowWithLink={isRowWithLink}
             />
         </StyledTable>
     );
