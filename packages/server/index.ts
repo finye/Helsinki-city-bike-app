@@ -7,6 +7,55 @@ app.get('/journeys', (req, res) => getDataFromTable(req, res, 'city-bikes-journe
 
 app.get('/stations', async (req, res) => getDataFromTable(req, res, 'city_bikes_station'));
 
+app.get('/station/:station_id', async (req, res) => {
+    const stationId = parseInt(req.params.station_id, 10);
+
+    const query = {
+        text: `
+        SELECT 
+            s.station_id,
+            s.name,
+            s.address,
+            s.x,
+            s.y,
+            COALESCE(d.departure_count, 0) AS departure_count,
+            COALESCE(r.return_count, 0) AS return_count
+        FROM 
+            "city_bikes_station" s
+            LEFT JOIN 
+                (SELECT 
+                    departure_station_id, 
+                    COUNT(*) AS departure_count
+                FROM 
+                    "city-bikes-journey"
+                WHERE 
+                    departure_station_id = $1
+                GROUP BY 
+                    departure_station_id
+                ) d ON s.station_id = d.departure_station_id
+            LEFT JOIN 
+                (SELECT 
+                    return_station_id, 
+                    COUNT(*) AS return_count
+                FROM 
+                    "city-bikes-journey"
+                WHERE 
+                    return_station_id = $1
+                GROUP BY 
+                    return_station_id
+                ) r ON s.station_id = r.return_station_id
+        WHERE 
+            s.station_id = $1;
+        `,
+
+        values: [stationId],
+    };
+
+    const result = await db.query(query)
+
+    return res.json(result.rows[0])
+})
+
 const getDataFromTable = async (req: Request, res: Response, tableName: string) => {
     const page = parseInt(req.query.page as string) || 1; // default to page 1
     const pageSize = parseInt(req.query.pageSize as string) || 10; // default to 10 items per page
