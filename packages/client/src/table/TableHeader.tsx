@@ -8,7 +8,7 @@ type TableHeaderProps<T, K extends keyof T> = {
 
 
 const TableHead = styled.thead`
-font-size: 3vh;
+font-size: 1rem;
 font-weight: bold;
 text-align: center;
 padding 2;

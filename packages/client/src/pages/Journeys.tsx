@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
 import styled from "styled-components"
-import { PAGE_SIZE } from "../App"
+import { PAGE_SIZE } from "../constants"
 import Table from "../table/Table"
 import { ColumnDefinitionType, CityBikesJourney } from "../table/types"
 
