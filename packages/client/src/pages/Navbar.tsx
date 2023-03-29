@@ -2,7 +2,7 @@ import React from "react";
 import { NavbarContainer, NavbarLinkContainer, NavbarLink } from '../styles/NavStyle';
 export interface NavbarProps { }
 
-const Navbar: React.FC<NavbarProps> = (props) => {
+const Navbar: React.FC<NavbarProps> = () => {
     return (
         <NavbarContainer>
             <NavbarLinkContainer>

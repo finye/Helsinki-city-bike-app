@@ -1,6 +1,6 @@
 import { CityBikeStation, TableRowsProps } from "./types"
 import { ReactNode } from 'react';
-import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components';
 
 const TableData = styled.td`
@@ -10,7 +10,9 @@ const TableData = styled.td`
     vertical-align: middle;
 `;
 
-const StyledTr = styled.tr`
+const StyledTr = styled.tr<{ isRowWithLink?: boolean }>`
+    cursor: ${(props) => props.isRowWithLink ? 'pointer' : 'initial'};
+
     :nth-of-type(odd) {
       background-color: #efefef;
     }
@@ -19,25 +21,28 @@ const StyledTr = styled.tr`
   }
 `
 
-const StyledLink = styled(Link)`
-    display: contents;
-`
+const TableRows = <T, K extends keyof T>({ data, columns, isRowWithLink }: TableRowsProps<T, K>): JSX.Element => {
+    const navigate = useNavigate()
 
-const TableRows = <T, K extends keyof T>({ data, columns }: TableRowsProps<T, K>): JSX.Element => {
+    const goRouteId = (route: string) => navigate(route)
+
     const rows = data.map((row, index) => {
         return (
-            <StyledLink key={`row-${index} `} to={`/station/${(row as CityBikeStation).station_id}`}>
-                <StyledTr>
-                    {columns.map((column, index2) => {
-                        return (
-                            <TableData key={`cell - ${index2} `} >
-                                {row[column.key] as ReactNode}
-                            </TableData>
-                        );
-                    }
-                    )}
-                </StyledTr>
-            </StyledLink>
+            <StyledTr
+                key={`row-${index} `}
+                onClick={() => isRowWithLink && goRouteId(`/station/${(row as CityBikeStation).station_id}`)}
+                isRowWithLink={isRowWithLink}
+            >
+                {columns.map((column, index2) => {
+                    return (
+                        <TableData key={`cell - ${index2} `} >
+                            {row[column.key] as ReactNode}
+                        </TableData>
+                    );
+                }
+                )}
+            </StyledTr>
+
         );
     });
 

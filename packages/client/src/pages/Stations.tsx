@@ -1,5 +1,14 @@
+import { useState, useEffect } from "react"
+import styled from "styled-components"
+import { PAGE_SIZE } from "../constants"
 import Table from "../table/Table"
 import { ColumnDefinitionType, CityBikeStation } from "../table/types"
+
+const ButtonWrapper = styled.div`
+    display:flex;
+    align-items: center;
+    justify-content: center;
+`
 
 const columns: ColumnDefinitionType<CityBikeStation, keyof CityBikeStation>[] = [
 
@@ -38,15 +47,28 @@ const columns: ColumnDefinitionType<CityBikeStation, keyof CityBikeStation>[] = 
     }
 ]
 
-interface StationsProps {
-    data: CityBikeStation[]
-}
+const Stations = () => {
+    const [stations, setStations] = useState<CityBikeStation[]>([])
+    const [page, setPage] = useState(1)
 
-const Stations = ({ data }: StationsProps) => {
+    useEffect(() => {
+        const fetchStations = async () => {
+            const response = await fetch(`/stations?pageSize=${PAGE_SIZE}&page=${page}`)
+            const data = await response.json()
+
+            setStations(data)
+        }
+        void fetchStations()
+    }, [page])
+
     return (
         <>
             <p> Station list </p>
-            <Table data={data} columns={columns} />
+            <Table data={stations} columns={columns} isRowWithLink />
+            <ButtonWrapper>
+                <button disabled={page === 1} onClick={() => setPage((prevState) => prevState - 1)}>Prev page</button>
+                <button onClick={() => setPage((prevState) => prevState + 1)}>Next page</button>
+            </ButtonWrapper>
         </>
     )
 }
