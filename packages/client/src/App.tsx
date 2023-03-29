@@ -30,7 +30,8 @@ const SingleStaionView = () => {
       <p>Longitude: {stationDetails?.x}</p>
       <p>Latitude: {stationDetails?.y}</p>
       <p>Address: {stationDetails?.address}</p>
-      <p>Journey: {stationDetails?.journey_count}</p>
+      <p>Amount of departures from station: {stationDetails?.departure_count}</p>
+      <p>Amount of arrivals to station: {stationDetails?.return_count}</p>
     </div>
   )
 

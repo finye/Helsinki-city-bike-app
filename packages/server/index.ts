@@ -11,11 +11,42 @@ app.get('/station/:station_id', async (req, res) => {
     const stationId = parseInt(req.params.station_id, 10);
 
     const query = {
-        text: `SELECT s.station_id , s.name , s.address , s.x, s.y, COUNT (j.departure_station_id) AS journey_count
-        FROM \"city_bikes_station\" s
-        LEFT JOIN \"city-bikes-journey\" j ON j.departure_station_id = $1
-        GROUP BY s.station_id, s.name , s.address , s.x, s.y
-        ORDER BY journey_count DESC`,
+        text: `
+        SELECT 
+            s.station_id,
+            s.name,
+            s.address,
+            s.x,
+            s.y,
+            COALESCE(d.departure_count, 0) AS departure_count,
+            COALESCE(r.return_count, 0) AS return_count
+        FROM 
+            "city_bikes_station" s
+            LEFT JOIN 
+                (SELECT 
+                    departure_station_id, 
+                    COUNT(*) AS departure_count
+                FROM 
+                    "city-bikes-journey"
+                WHERE 
+                    departure_station_id = $1
+                GROUP BY 
+                    departure_station_id
+                ) d ON s.station_id = d.departure_station_id
+            LEFT JOIN 
+                (SELECT 
+                    return_station_id, 
+                    COUNT(*) AS return_count
+                FROM 
+                    "city-bikes-journey"
+                WHERE 
+                    return_station_id = $1
+                GROUP BY 
+                    return_station_id
+                ) r ON s.station_id = r.return_station_id
+        WHERE 
+            s.station_id = $1;
+        `,
 
         values: [stationId],
     };
