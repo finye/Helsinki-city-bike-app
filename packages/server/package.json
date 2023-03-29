@@ -6,10 +6,11 @@
   "scripts": {
     "build": "tsc",
     "start": "npm run build && node dist/index.js",
-    "create-journey-table": "npm run build && node dist/createCityBikeJourneyTable.js",
-    "create-stations-table": "npm run build && node dist/createCityBikeStationTable.js",
-    "populate-stations-table": "npm run build && node dist/populateCityBikeStationTable.js",
-    "populate-journeys-table": "npm run build && node dist/populateCityBikeJourneyTable.js"
+    "parse-sample": "npm run build && node dist/db/parseDataset.js",
+    "create-journey-table": "npm run build && node dist/db/createCityBikeJourneyTable.js",
+    "create-stations-table": "npm run build && node dist/db/createCityBikeStationTable.js",
+    "populate-stations-table": "npm run build && node dist/db/populateCityBikeStationTable.js",
+    "populate-journeys-table": "npm run build && node dist/db/populateCityBikeJourneyTable.js"
   },
   "repository": {
     "type": "git",

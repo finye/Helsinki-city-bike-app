@@ -1,5 +1,7 @@
 import { CityBikeJourney, CityBikeStation } from "./types";
 
+const LIMIT = 10
+
 const hasEmptyValue = (row: any): boolean => {
     for (const key in row) {
         if (row.hasOwnProperty(key)) {
@@ -13,20 +15,26 @@ const hasEmptyValue = (row: any): boolean => {
 }
 
 const mapCityBikeJourneyDataSet = (row: any): CityBikeJourney | undefined => {
-    if (hasEmptyValue(row)) {
-        console.log('Row has empty value');
+    const mappedRow = {
+        coveredDistanceInMeters: Number(row['Covered distance (m)']),
+        durationInSeconds: Number(row['Duration (sec.)']),
+    }
+    const isJourneyLessThanTenSeconds = mappedRow.durationInSeconds < LIMIT
+    const isCoveredDistanceLessThanTenMeters = mappedRow.coveredDistanceInMeters < LIMIT
+
+    if (hasEmptyValue(row) || isCoveredDistanceLessThanTenMeters || isJourneyLessThanTenSeconds) {
+        console.log('Row is invalid!');
         return
     }
 
     return {
+        ...mappedRow,
         departure: row['Departure'],
         returnTime: row['Return'],
         departureStationId: Number(row['Departure station id']),
         departureStationName: row['Departure station name'],
         returnStationId: Number(row['Return station id']),
         returnStationName: row['Return station name'],
-        coveredDistanceInMeters: Number(row['Covered distance (m)']),
-        durationInSeconds: Number(row['Duration (sec.)']),
     }
 }
 
