@@ -9,7 +9,13 @@ const ButtonWrapper = styled.div`
     align-items: center;
     justify-content: center;
 `
-
+const StyledInput = styled.input`
+margin-right: 8px;
+width: 200px;
+`
+const InputWrapper = styled.p`
+margin-left: 20px;
+`
 const columns: ColumnDefinitionType<CityBikesJourney, keyof CityBikesJourney>[] = [
     {
         key: 'departure_station_name',
@@ -83,13 +89,16 @@ const Journeys = () => {
 
     return (
         <>
-            <p> Journey list</p>
-            <form onSubmit={handleSearchSubmit}>
-                <input type="text" name="searchTerm" value={values.searchTerm}
-                    onChange={handleChange} />
-                <button type="submit">Search</button>
-            </form>
-
+            <InputWrapper>
+                <p> Journey list</p>
+                <form onSubmit={handleSearchSubmit}>
+                    <StyledInput type="text" name="searchTerm" value={values.searchTerm}
+                        onChange={handleChange} />
+                    <button type="submit">Search</button>
+                </form>
+                <p>To search, enter a departure or station name into the input field and press the search button.</p>
+                <br />
+            </InputWrapper>
             <Table data={journeys} columns={columns} setSortedData={setJourneys} />
 
             <ButtonWrapper>

@@ -20,9 +20,7 @@ const SingleStaionView = () => {
     return (
         <div>
             <h1>Station: {stationDetails?.station_id}</h1>
-
-            <p>Longitude: {stationDetails?.x}</p>
-            <p>Latitude: {stationDetails?.y}</p>
+            <p>Name: {stationDetails?.name}</p>
             <p>Address: {stationDetails?.address}</p>
             <p>Amount of departures from station: {stationDetails?.departure_count}</p>
             <p>Amount of arrivals to station: {stationDetails?.return_count}</p>
