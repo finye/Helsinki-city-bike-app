@@ -60,12 +60,22 @@ const getDataFromTable = async (req: Request, res: Response, tableName: string) 
     const page = parseInt(req.query.page as string) || 1; // default to page 1
     const pageSize = parseInt(req.query.pageSize as string) || 10; // default to 10 items per page
     const offset = (page - 1) * pageSize;
+    const searchTerm = req.query.q
 
     try {
+        let query = `SELECT * FROM \"${tableName}\"`
+
+        if (searchTerm) {
+            query += ` WHERE departure_station_name ILIKE $3 OR return_station_name ILIKE $3`
+        }
+
+        query += ` LIMIT $1 OFFSET $2`
+
         const { rows } = await db.query(
-            `SELECT * FROM \"${tableName}\" LIMIT $1 OFFSET $2`,
-            [pageSize, offset]
+            query,
+            searchTerm ? [pageSize, offset, `%${searchTerm}%`] : [pageSize, offset]
         );
+
         res.json(rows);
     } catch (error) {
         console.error(error);
