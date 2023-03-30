@@ -1,4 +1,4 @@
-import { CityBikeStation, TableRowsProps } from "./types"
+import { CityBikeStation, TableProps } from "./types"
 import { ReactNode } from 'react';
 import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components';
@@ -21,7 +21,7 @@ const StyledTr = styled.tr<{ isRowWithLink?: boolean }>`
   }
 `
 
-const TableRows = <T, K extends keyof T>({ data, columns, isRowWithLink }: TableRowsProps<T, K>): JSX.Element => {
+const TableRows = <T, K extends keyof T>({ data, columns, isRowWithLink }: TableProps<T, K>): JSX.Element => {
     const navigate = useNavigate()
 
     const goRouteId = (route: string) => navigate(route)
