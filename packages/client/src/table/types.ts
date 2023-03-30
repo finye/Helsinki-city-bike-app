@@ -17,7 +17,7 @@ export interface CityBikesJourney {
     departure_station_name: string;
     return_station_id: number;
     return_station_name: string;
-    covered_distance_in_meters: number;
+    covered_distance_in_meters: string;
     duration_in_seconds: number;
 
 }
