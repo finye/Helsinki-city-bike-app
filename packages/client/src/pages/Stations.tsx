@@ -9,7 +9,9 @@ const ButtonWrapper = styled.div`
     align-items: center;
     justify-content: center;
 `
-
+const StyledP = styled.p`
+margin-left: 20px;
+`
 const columns: ColumnDefinitionType<CityBikeStation, keyof CityBikeStation>[] = [
 
     {
@@ -63,7 +65,7 @@ const Stations = () => {
 
     return (
         <>
-            <p> Station list </p>
+            <StyledP> Station list </StyledP>
             <Table data={stations} columns={columns} setSortedData={setStations} isRowWithLink />
             <ButtonWrapper>
                 <button disabled={page === 1} onClick={() => setPage((prevState) => prevState - 1)}>Prev page</button>

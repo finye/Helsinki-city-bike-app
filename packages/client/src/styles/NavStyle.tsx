@@ -9,6 +9,7 @@ height: 50px;
 background-color: white;
 display: flex;
 flex-direction: column;
+align-items: center;
 box-shadow: 0 2px 4px 0 rgba(0,0,0,.2);
 
 `
