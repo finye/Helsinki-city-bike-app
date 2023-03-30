@@ -64,7 +64,7 @@ const Stations = () => {
     return (
         <>
             <p> Station list </p>
-            <Table data={stations} columns={columns} isRowWithLink />
+            <Table data={stations} columns={columns} setSortedData={setStations} isRowWithLink />
             <ButtonWrapper>
                 <button disabled={page === 1} onClick={() => setPage((prevState) => prevState - 1)}>Prev page</button>
                 <button onClick={() => setPage((prevState) => prevState + 1)}>Next page</button>

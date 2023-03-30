@@ -90,7 +90,7 @@ const Journeys = () => {
                 <button type="submit">Search</button>
             </form>
 
-            <Table data={journeys} columns={columns} />
+            <Table data={journeys} columns={columns} setSortedData={setJourneys} />
 
             <ButtonWrapper>
                 <button disabled={page === 1} onClick={() => setPage((prevState) => prevState - 1)}>Prev page</button>
