@@ -11,9 +11,7 @@ const TableHead = styled.thead`
 font-size: 1rem;
 font-weight: bold;
 text-align: center;
-padding 2;
 background-color: #c2c2c2;
-}
 `;
 
 
