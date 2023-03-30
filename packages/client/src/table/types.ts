@@ -31,13 +31,7 @@ export type ColumnDefinitionType<T, K extends keyof T> = {
 export type TableProps<T, K extends keyof T> = {
     data: Array<T>;
     columns: Array<ColumnDefinitionType<T, K>>;
-    setSortedData: (sorted: T[]) => void
+    setSortedData?: (sorted: T[]) => void
     isRowWithLink?: boolean
 }
 
-// TODO: remove one of the types
-export type TableRowsProps<T, K extends keyof T> = {
-    data: Array<T>;
-    columns: Array<ColumnDefinitionType<T, K>>;
-    isRowWithLink?: boolean
-}
