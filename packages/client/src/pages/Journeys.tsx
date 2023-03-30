@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect, ChangeEvent, FormEvent, FormEventHandler } from "react"
 import styled from "styled-components"
 import { PAGE_SIZE } from "../constants"
 import Table from "../table/Table"
@@ -30,33 +30,67 @@ const columns: ColumnDefinitionType<CityBikesJourney, keyof CityBikesJourney>[] 
     }
 ]
 
+interface FormValues {
+    searchTerm: string;
+}
+
+
 const Journeys = () => {
     const [journeys, setJourneys] = useState<CityBikesJourney[]>([])
     const [page, setPage] = useState(1)
 
+    const [values, setValues] = useState<FormValues>({
+        searchTerm: ''
+    });
+
+    const [searchQuery, setSearchQuery] = useState('');
+
     useEffect(() => {
-        const fetchjourneys = async () => {
-            const response = await fetch(`/journeys?pageSize=${PAGE_SIZE}&page=${page}`)
+
+        const fetchjourneys = async (_searchQuery = '') => {
+            const response = await fetch(`/journeys?pageSize=${PAGE_SIZE}&page=${page}${_searchQuery}`)
             const data = await response.json()
 
-            setJourneys(data)
+            const mappedData = data.map((journey: CityBikesJourney) => {
+                return {
+                    ...journey,
+                    covered_distance_in_meters: `${(Number(journey.covered_distance_in_meters) / 1000).toFixed(1)}`,
+                    duration_in_seconds: Number(`${(journey.duration_in_seconds / 60).toFixed(1)}`)
+                };
+            })
+
+            setJourneys(mappedData)
         }
 
-        void fetchjourneys()
-    }, [page])
+        if (searchQuery === '') {
 
-    const mappedData = journeys.map((journey) => {
-        return {
-            ...journey,
-            covered_distance_in_meters: `${(Number(journey.covered_distance_in_meters) / 1000).toFixed(1)}`,
-            duration_in_seconds: `${(journey.duration_in_seconds / 60).toFixed(1)}`
-        };
-    });
+            void fetchjourneys()
+        } else {
+            void fetchjourneys(`&q=${searchQuery}`)
+        }
+    }, [searchQuery, page])
+
+    const handleSearchSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault()
+
+        setSearchQuery(values.searchTerm);
+    }
+
+    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const { name, value } = event.target;
+        setValues({ ...values, [name]: value });
+    };
 
     return (
         <>
             <p> Journey list</p>
-            <Table data={mappedData} columns={columns} />
+            <form onSubmit={handleSearchSubmit}>
+                <input type="text" name="searchTerm" value={values.searchTerm}
+                    onChange={handleChange} />
+                <button type="submit">Search</button>
+            </form>
+
+            <Table data={journeys} columns={columns} />
 
             <ButtonWrapper>
                 <button disabled={page === 1} onClick={() => setPage((prevState) => prevState - 1)}>Prev page</button>
