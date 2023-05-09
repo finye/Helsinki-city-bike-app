@@ -35,8 +35,4 @@ export const insertCityBikeJourney = async (cityBikeJourney: CityBikeJourney[]) 
         client.release();
     }
 }
-
-/* const _sampleData = sampleData.map(e => mapCityBikeJourneyDataSet(e) as CityBikeJourney);
-(async () => await insertCityBikeJourney(_sampleData))(); */
-
 (async () => await insertCityBikeJourney(await parseCityBikeJourneyDataset('./dataset/city_bike_journeys.csv', mapCityBikeJourneyDataSet)))();
