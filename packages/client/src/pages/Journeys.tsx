@@ -96,7 +96,7 @@ const Journeys = () => {
                         onChange={handleChange} />
                     <button type="submit">Search</button>
                 </form>
-                <p>To search, enter a departure or station name into the input field and press the search button.</p>
+                <p>To search, enter a departure or return station name into the input field and press the search button.</p>
                 <br />
             </InputWrapper>
             <Table data={journeys} columns={columns} setSortedData={setJourneys} />
