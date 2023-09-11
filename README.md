@@ -1,6 +1,6 @@
 # Helsinki-city-bike-app
 
-This project is built using TypeScript and Nodejs on the server side. React is used for the frontend and Docker is used to create and run PostgreSQL database. The application also runs in Docker.
+This project is built using TypeScript and Node.js on the server side. React is used for the frontend and Docker is used to create and run PostgreSQL database. The application also runs in Docker.
 
 ## Scripts to run the app
 
